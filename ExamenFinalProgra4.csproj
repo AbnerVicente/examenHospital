@@ -189,6 +189,7 @@
     <Content Include="BD\DataSetHospital.xss">
       <DependentUpon>DataSetHospital.xsd</DependentUpon>
     </Content>
+    <Content Include="nuget.config" />
     <None Include="packages.config" />
     <Content Include="Principal.Master" />
     <None Include="Properties\PublishProfiles\ExamenFinalProgra420241112102441 - Web Deploy.pubxml" />
