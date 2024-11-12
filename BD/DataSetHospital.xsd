@@ -1,0 +1,931 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetHospital" targetNamespace="http://tempuri.org/DataSetHospital.xsd" xmlns:mstns="http://tempuri.org/DataSetHospital.xsd" xmlns="http://tempuri.org/DataSetHospital.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ExamenHospitalConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ExamenHospitalConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ExamenHospitalConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="IngresoPacienteTableAdapter" GeneratorDataComponentClassName="IngresoPacienteTableAdapter" Name="IngresoPaciente" UserDataComponentName="IngresoPacienteTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoPacientes" GetMethodModifier="Public" GetMethodName="GetDataListadoPacientes" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoPacientes" UserSourceName="GetDataListadoPacientes">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Ingreso.codigo_ingreso AS Codigo, Ingreso.fecha_ingreso AS Ingreso, Ingreso.fecha_egreso AS Egreso, Ingreso.codigo_cama AS CodCama, Ingreso.codigo_paciente AS CodPaciente, Ingreso.codigo_medico AS CodMedico, 
+                  Medico.nombre + ' ' + Medico.apellidos AS Medico, Paciente.nombre + ' ' + Paciente.apellido AS Paciente, Cama.nombre AS Cama, Cama.estado_cama AS EstadoCama
+FROM     Cama INNER JOIN
+                  Ingreso ON Cama.codigo_cama = Ingreso.codigo_cama INNER JOIN
+                  Medico ON Ingreso.codigo_medico = Medico.codigo_medico INNER JOIN
+                  Paciente ON Ingreso.codigo_paciente = Paciente.codigo_paciente</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Ingreso" DataSetColumn="Ingreso" />
+              <Mapping SourceColumn="Egreso" DataSetColumn="Egreso" />
+              <Mapping SourceColumn="CodCama" DataSetColumn="CodCama" />
+              <Mapping SourceColumn="CodPaciente" DataSetColumn="CodPaciente" />
+              <Mapping SourceColumn="CodMedico" DataSetColumn="CodMedico" />
+              <Mapping SourceColumn="Medico" DataSetColumn="Medico" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="Cama" DataSetColumn="Cama" />
+              <Mapping SourceColumn="EstadoCama" DataSetColumn="EstadoCama" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Codigo" Modifier="Public" Name="Codigo" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="Codigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ISNULL(MAX(codigo_ingreso), 0) + 1 AS Codigo
+FROM     Ingreso</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DarDeAlta" Modifier="Public" Name="DarDeAlta" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DarDeAlta">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Ingreso
+SET          fecha_ingreso = @Fecha
+WHERE  (codigo_ingreso = @Codigo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Fecha" ColumnName="fecha_ingreso" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="smalldatetime" DbType="DateTime" Direction="Input" ParameterName="@Fecha" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="4" SourceColumn="fecha_ingreso" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_ingreso" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_ingreso" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorPacMedico" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorPacMedico" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorPacMedico" UserSourceName="GetDataBuscarPorPacMedico">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Ingreso.codigo_ingreso AS Codigo, Ingreso.fecha_ingreso AS Ingreso, Ingreso.fecha_egreso AS Egreso, Ingreso.codigo_cama AS CodCama, Ingreso.codigo_paciente AS CodPaciente, Ingreso.codigo_medico AS CodMedico, 
+                  Medico.nombre + ' ' + Medico.apellidos AS Medico, Paciente.nombre + ' ' + Paciente.apellido AS Paciente, Cama.nombre AS Cama, Cama.estado_cama AS EstadoCama
+FROM     Cama INNER JOIN
+                  Ingreso ON Cama.codigo_cama = Ingreso.codigo_cama INNER JOIN
+                  Medico ON Ingreso.codigo_medico = Medico.codigo_medico INNER JOIN
+                  Paciente ON Ingreso.codigo_paciente = Paciente.codigo_paciente
+WHERE  (Ingreso.codigo_paciente = @CodPac) AND (Ingreso.codigo_medico = @CodMedico)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodPac" ColumnName="codigo_paciente" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodPac" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CodPaciente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodMedico" ColumnName="codigo_medico" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodMedico" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CodMedico" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GuardarPaciente" Modifier="Public" Name="GuardarPaciente" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GuardarPaciente">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Ingreso
+                  (codigo_ingreso, fecha_ingreso, codigo_cama, codigo_paciente, codigo_medico)
+VALUES (@Codigo,@fechaIngreso,@Cama,@Paciente,@Medico)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_ingreso" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_ingreso" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="fechaIngreso" ColumnName="fecha_ingreso" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="smalldatetime" DbType="DateTime" Direction="Input" ParameterName="@fechaIngreso" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="4" SourceColumn="fecha_ingreso" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Cama" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Cama" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_cama" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Paciente" ColumnName="codigo_paciente" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Paciente" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_paciente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Medico" ColumnName="codigo_medico" DataSourceName="ExamenHospital.dbo.Ingreso" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Medico" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_medico" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CamasTableAdapter" GeneratorDataComponentClassName="CamasTableAdapter" Name="Camas" UserDataComponentName="CamasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoCamas" GetMethodModifier="Public" GetMethodName="GetDataListadoCamas" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoCamas" UserSourceName="GetDataListadoCamas">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Cama.codigo_cama AS Codigo, Cama.nombre AS Nombre, Cama.Descripcion, Cama.estado_cama AS Estado, Cama.codigo_habitacion AS CodHabitacion, Habitacion.nombre_habitacion AS Habitacion, 
+                  Cama.nombre + ' - ' + Habitacion.nombre_habitacion AS NombreCompleto
+FROM     Cama INNER JOIN
+                  Habitacion ON Cama.codigo_habitacion = Habitacion.codigo_habitacion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Nombre" DataSetColumn="Nombre" />
+              <Mapping SourceColumn="Descripcion" DataSetColumn="Descripcion" />
+              <Mapping SourceColumn="Estado" DataSetColumn="Estado" />
+              <Mapping SourceColumn="CodHabitacion" DataSetColumn="CodHabitacion" />
+              <Mapping SourceColumn="Habitacion" DataSetColumn="Habitacion" />
+              <Mapping SourceColumn="NombreCompleto" DataSetColumn="NombreCompleto" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ActualizarCama" Modifier="Public" Name="ActualizarCama" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ActualizarCama">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Cama
+SET          nombre = @Nombre, Descripcion = @Descripcion, estado_cama = @Estado, codigo_habitacion = @Habitacion
+WHERE  (codigo_cama = @CodigoCama)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Descripcion" ColumnName="Descripcion" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="nvarchar(300)" DbType="String" Direction="Input" ParameterName="@Descripcion" Precision="0" ProviderType="NVarChar" Scale="0" Size="300" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Estado" ColumnName="estado_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@Estado" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="estado_cama" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Habitacion" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Habitacion" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_habitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoCama" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoCama" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_cama" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ActualizarEstado" Modifier="Public" Name="ActualizarEstado" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="ActualizarEstado">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Cama
+SET          estado_cama = @Estado
+WHERE  (codigo_cama = @CodCama)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Estado" ColumnName="estado_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@Estado" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="estado_cama" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodCama" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodCama" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_cama" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="BorrarCama" Modifier="Public" Name="BorrarCama" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="BorrarCama">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM Cama
+WHERE  (codigo_cama = @Codigo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_cama" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Codigo" Modifier="Public" Name="Codigo" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="Codigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT MAX(codigo_cama) + 1 AS Codigo
+FROM     Cama</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarNombreEnHabitacion" GetMethodModifier="Public" GetMethodName="GetDataBuscarNombreEnHabitacion" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarNombreEnHabitacion" UserSourceName="GetDataBuscarNombreEnHabitacion">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Cama.codigo_cama AS Codigo, Cama.nombre AS Nombre, Cama.Descripcion, Cama.estado_cama AS Estado, Cama.codigo_habitacion AS CodHabitacion, Habitacion.nombre_habitacion AS Habitacion, 
+                  Cama.nombre + ' - ' + Habitacion.nombre_habitacion AS NombreCompleto
+FROM     Cama INNER JOIN
+                  Habitacion ON Cama.codigo_habitacion = Habitacion.codigo_habitacion
+WHERE  (Cama.codigo_habitacion = @CodigoHabitacion) AND (Cama.nombre = @NombreCama)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoHabitacion" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoHabitacion" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CodHabitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="NombreCama" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@NombreCama" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="Nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataListadoCamasActivas" GetMethodModifier="Public" GetMethodName="GetDataListadoCamasActivas" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataListadoCamasActivas" UserSourceName="GetDataListadoCamasActivas">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Cama.codigo_cama AS Codigo, Cama.nombre AS Nombre, Cama.Descripcion, Cama.estado_cama AS Estado, Cama.codigo_habitacion AS CodHabitacion, Habitacion.nombre_habitacion AS Habitacion, 
+                  Cama.nombre + ' - ' + Habitacion.nombre_habitacion AS NombreCompleto
+FROM     Cama INNER JOIN
+                  Habitacion ON Cama.codigo_habitacion = Habitacion.codigo_habitacion
+WHERE  (Cama.estado_cama = 1)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataListadoEdicion" GetMethodModifier="Public" GetMethodName="GetDataListadoEdicion" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataListadoEdicion" UserSourceName="GetDataListadoEdicion">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Cama.codigo_cama AS Codigo, Cama.nombre AS Nombre, Cama.Descripcion, Cama.estado_cama AS Estado, Cama.codigo_habitacion AS CodHabitacion, Habitacion.nombre_habitacion AS Habitacion, 
+                  Cama.nombre + ' - ' + Habitacion.nombre_habitacion AS NombreCompleto
+FROM     Cama INNER JOIN
+                  Habitacion ON Cama.codigo_habitacion = Habitacion.codigo_habitacion
+WHERE  (Cama.estado_cama = 1)
+UNION ALL
+SELECT Cama_1.codigo_cama AS Codigo, Cama_1.nombre AS Nombre, Cama_1.Descripcion, Cama_1.estado_cama AS Estado, Cama_1.codigo_habitacion AS CodHabitacion, Habitacion_1.nombre_habitacion AS Habitacion, 
+                  Cama_1.nombre + ' - ' + Habitacion_1.nombre_habitacion AS NombreCompleto
+FROM     Cama AS Cama_1 INNER JOIN
+                  Habitacion AS Habitacion_1 ON Cama_1.codigo_habitacion = Habitacion_1.codigo_habitacion
+WHERE  (Cama_1.codigo_cama = @CodigoCama)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoCama" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoCama" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataVerificarDuplicados" GetMethodModifier="Public" GetMethodName="GetDataVerificarDuplicados" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataVerificarDuplicados" UserSourceName="GetDataVerificarDuplicados">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Cama.codigo_cama AS Codigo, Cama.nombre AS Nombre, Cama.Descripcion, Cama.estado_cama AS Estado, Cama.codigo_habitacion AS CodHabitacion, Habitacion.nombre_habitacion AS Habitacion, 
+                  Cama.nombre + ' - ' + Habitacion.nombre_habitacion AS NombreCompleto
+FROM     Cama INNER JOIN
+                  Habitacion ON Cama.codigo_habitacion = Habitacion.codigo_habitacion
+WHERE  (Cama.codigo_cama &lt;&gt; @Codigo) AND (Cama.nombre = @Nombre) AND (Cama.codigo_habitacion = @CodigoHabitacion)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="Nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoHabitacion" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoHabitacion" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="CodHabitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GuardarCama" Modifier="Public" Name="GuardarCama" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="GuardarCama">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Cama
+                  (codigo_cama, nombre, Descripcion, estado_cama, codigo_habitacion)
+VALUES (@Codigo,@Nombre,@Descripcion,@Estado,@Habitacion)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_cama" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Descripcion" ColumnName="Descripcion" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="nvarchar(300)" DbType="String" Direction="Input" ParameterName="@Descripcion" Precision="0" ProviderType="NVarChar" Scale="0" Size="300" SourceColumn="Descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Estado" ColumnName="estado_cama" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@Estado" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="estado_cama" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Habitacion" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Cama" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Habitacion" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_habitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MedicosTableAdapter" GeneratorDataComponentClassName="MedicosTableAdapter" Name="Medicos" UserDataComponentName="MedicosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoMedico" GetMethodModifier="Public" GetMethodName="GetDataListadoMedico" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoMedico" UserSourceName="GetDataListadoMedico">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Medico.codigo_medico AS Codigo, Medico.nombre + ' ' + Medico.apellidos AS Medico, Medico.direccion AS Direccion, Medico.telefono AS Telefono, Medico.codigo_especialidad AS CodEspecialidad, 
+                  Especialidad.nombre_especialidad AS Especialidad
+FROM     Medico INNER JOIN
+                  Especialidad ON Medico.codigo_especialidad = Especialidad.codigo_especialidad</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Medico" DataSetColumn="Medico" />
+              <Mapping SourceColumn="Direccion" DataSetColumn="Direccion" />
+              <Mapping SourceColumn="Telefono" DataSetColumn="Telefono" />
+              <Mapping SourceColumn="CodEspecialidad" DataSetColumn="CodEspecialidad" />
+              <Mapping SourceColumn="Especialidad" DataSetColumn="Especialidad" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ActualizarMedico" Modifier="Public" Name="ActualizarMedico" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ActualizarMedico">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Medico
+SET          nombre = @Nombre, apellidos = @Apellido, direccion = @Direccion, telefono = @Telefono, codigo_especialidad = @Especialidad
+WHERE  (codigo_medico = @CodMedico)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Apellido" ColumnName="apellidos" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Apellido" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="apellidos" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Direccion" ColumnName="direccion" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(300)" DbType="String" Direction="Input" ParameterName="@Direccion" Precision="0" ProviderType="NVarChar" Scale="0" Size="300" SourceColumn="direccion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Telefono" ColumnName="telefono" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(12)" DbType="String" Direction="Input" ParameterName="@Telefono" Precision="0" ProviderType="NVarChar" Scale="0" Size="12" SourceColumn="telefono" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Especialidad" ColumnName="codigo_especialidad" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Especialidad" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_especialidad" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodMedico" ColumnName="codigo_medico" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodMedico" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_medico" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Codigo" Modifier="Public" Name="Codigo" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Codigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT MAX(codigo_medico) + 1 AS Codigo
+FROM     Medico</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="EliminarMedico" Modifier="Public" Name="EliminarMedico" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="EliminarMedico">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM Medico
+WHERE  (codigo_medico = @codMedico)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="codMedico" ColumnName="codigo_medico" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@codMedico" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_medico" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GuardarMedico" Modifier="Public" Name="GuardarMedico" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="GuardarMedico">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Medico
+                  (codigo_medico, nombre, apellidos, direccion, codigo_especialidad, telefono)
+VALUES (@Codigo,@Nombre,@Apellido,@Direccion,@Especialidad,@Telefono)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_medico" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_medico" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Apellido" ColumnName="apellidos" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Apellido" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="apellidos" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Direccion" ColumnName="direccion" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(300)" DbType="String" Direction="Input" ParameterName="@Direccion" Precision="0" ProviderType="NVarChar" Scale="0" Size="300" SourceColumn="direccion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Especialidad" ColumnName="codigo_especialidad" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Especialidad" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_especialidad" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Telefono" ColumnName="telefono" DataSourceName="ExamenHospital.dbo.Medico" DataTypeServer="nvarchar(12)" DbType="String" Direction="Input" ParameterName="@Telefono" Precision="0" ProviderType="NVarChar" Scale="0" Size="12" SourceColumn="telefono" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PacientesTableAdapter" GeneratorDataComponentClassName="PacientesTableAdapter" Name="Pacientes" UserDataComponentName="PacientesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoPacientes" GetMethodModifier="Public" GetMethodName="GetDataListadoPacientes" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoPacientes" UserSourceName="GetDataListadoPacientes">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Paciente.codigo_paciente AS Codigo, Paciente.nombre + ' ' + Paciente.apellido AS Paciente, Paciente.direccion AS Direccion, Paciente.telefono AS Telefono, Paciente.fechanac AS FechaNac, Paciente.codigo_muni AS CodMuni, 
+                  Municipio.nombre_muni AS Municipio, Departamento.nombre_depa AS Departamento
+FROM     Departamento INNER JOIN
+                  Municipio ON Departamento.codigo_depa = Municipio.codigo_depa INNER JOIN
+                  Paciente ON Municipio.codigo_muni = Paciente.codigo_muni</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Paciente" DataSetColumn="Paciente" />
+              <Mapping SourceColumn="Direccion" DataSetColumn="Direccion" />
+              <Mapping SourceColumn="Telefono" DataSetColumn="Telefono" />
+              <Mapping SourceColumn="FechaNac" DataSetColumn="FechaNac" />
+              <Mapping SourceColumn="CodMuni" DataSetColumn="CodMuni" />
+              <Mapping SourceColumn="Municipio" DataSetColumn="Municipio" />
+              <Mapping SourceColumn="Departamento" DataSetColumn="Departamento" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ActualizarPaciente" Modifier="Public" Name="ActualizarPaciente" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ActualizarPaciente">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Paciente
+SET          nombre = @Nombre, apellido = @Apellido, direccion = @Direccion, telefono = @Telefono, fechanac = @FechaNac, codigo_muni = @Municipio
+WHERE  (codigo_paciente = @CodigoPac)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Apellido" ColumnName="apellido" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Apellido" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="apellido" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Direccion" ColumnName="direccion" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(300)" DbType="String" Direction="Input" ParameterName="@Direccion" Precision="0" ProviderType="NVarChar" Scale="0" Size="300" SourceColumn="direccion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Telefono" ColumnName="telefono" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(12)" DbType="String" Direction="Input" ParameterName="@Telefono" Precision="0" ProviderType="NVarChar" Scale="0" Size="12" SourceColumn="telefono" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="FechaNac" ColumnName="fechanac" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="smalldatetime" DbType="DateTime" Direction="Input" ParameterName="@FechaNac" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="4" SourceColumn="fechanac" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Municipio" ColumnName="codigo_muni" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Municipio" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_muni" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoPac" ColumnName="codigo_paciente" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoPac" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_paciente" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Codigo" Modifier="Public" Name="Codigo" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Codigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT MAX(codigo_paciente) + 1 AS Codigo
+FROM     Paciente</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="EliminarPaciente" Modifier="Public" Name="EliminarPaciente" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="EliminarPaciente">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM Paciente
+WHERE  (codigo_paciente = @CodigoPac)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoPac" ColumnName="codigo_paciente" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoPac" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_paciente" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GuardarPaciente" Modifier="Public" Name="GuardarPaciente" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="GuardarPaciente">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Paciente
+                  (codigo_paciente, nombre, apellido, direccion, telefono, fechanac, codigo_muni)
+VALUES (@Codigo,@Nombre,@Apellido,@Direccion,@Telefono,@FechaNac,@Municipio)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_paciente" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_paciente" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Nombre" ColumnName="nombre" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Nombre" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="nombre" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Apellido" ColumnName="apellido" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Apellido" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="apellido" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Direccion" ColumnName="direccion" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(300)" DbType="String" Direction="Input" ParameterName="@Direccion" Precision="0" ProviderType="NVarChar" Scale="0" Size="300" SourceColumn="direccion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Telefono" ColumnName="telefono" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="nvarchar(12)" DbType="String" Direction="Input" ParameterName="@Telefono" Precision="0" ProviderType="NVarChar" Scale="0" Size="12" SourceColumn="telefono" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="FechaNac" ColumnName="fechanac" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="smalldatetime" DbType="DateTime" Direction="Input" ParameterName="@FechaNac" Precision="0" ProviderType="SmallDateTime" Scale="0" Size="4" SourceColumn="fechanac" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Municipio" ColumnName="codigo_muni" DataSourceName="ExamenHospital.dbo.Paciente" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Municipio" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_muni" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DepartamentoTableAdapter" GeneratorDataComponentClassName="DepartamentoTableAdapter" Name="Departamento" UserDataComponentName="DepartamentoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Departamento" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoDepartamentos" GetMethodModifier="Public" GetMethodName="GetDataListadoDepartamentos" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoDepartamentos" UserSourceName="GetDataListadoDepartamentos">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_depa AS Codigo, nombre_depa AS Departamento
+FROM     Departamento</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Departamento" DataSetColumn="Departamento" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MunicipioTableAdapter" GeneratorDataComponentClassName="MunicipioTableAdapter" Name="Municipio" UserDataComponentName="MunicipioTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Municipio" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataListadoMunicipios" GetMethodModifier="Public" GetMethodName="GetDataListadoMunicipios" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoMunicipios" UserSourceName="GetDataListadoMunicipios">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [Municipio] WHERE (([codigo_muni] = @Original_Codigo))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_Codigo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [Municipio] ([codigo_muni], [nombre_muni], [codigo_depa]) VALUES (@Codigo, @Municipio, @Departamento)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Municipio" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Municipio" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Departamento" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Departamento" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_muni AS Codigo, nombre_muni AS Municipio, codigo_depa AS Departamento
+FROM     Municipio</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [Municipio] SET [codigo_muni] = @Codigo, [nombre_muni] = @Municipio, [codigo_depa] = @Departamento WHERE (([codigo_muni] = @Original_Codigo))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Municipio" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="Municipio" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Departamento" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Departamento" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_Codigo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Municipio" DataSetColumn="Municipio" />
+              <Mapping SourceColumn="Departamento" DataSetColumn="Departamento" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Municipio" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorCodigo" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorCodigo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorCodigo" UserSourceName="GetDataBuscarPorCodigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_muni AS Codigo, nombre_muni AS Municipio, codigo_depa AS Departamento
+FROM     Municipio
+WHERE  (codigo_muni = @CodMuni)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodMuni" ColumnName="codigo_muni" DataSourceName="ExamenHospital.dbo.Municipio" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodMuni" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Municipio" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorDepartamento" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorDepartamento" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorDepartamento" UserSourceName="GetDataBuscarPorDepartamento">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_depa AS Departamento, codigo_muni AS Codigo, nombre_muni AS Municipio FROM Municipio WHERE (codigo_depa = @CodDepa)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodDepa" ColumnName="codigo_depa" DataSourceName="ExamenHospital.dbo.Municipio" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodDepa" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Departamento" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EspecialidadTableAdapter" GeneratorDataComponentClassName="EspecialidadTableAdapter" Name="Especialidad" UserDataComponentName="EspecialidadTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Especialidad" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoEspecialidades" GetMethodModifier="Public" GetMethodName="GetDataListadoEspecialidades" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoEspecialidades" UserSourceName="GetDataListadoEspecialidades">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_especialidad AS Codigo, nombre_especialidad AS Especialidad
+FROM     Especialidad</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Especialidad" DataSetColumn="Especialidad" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ActualizarEspecialidad" Modifier="Public" Name="ActualizarEspecialidad" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ActualizarEspecialidad">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Especialidad
+SET          nombre_especialidad = @NombreEspe
+WHERE  (codigo_especialidad = @CodigoEspe)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="NombreEspe" ColumnName="nombre_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@NombreEspe" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="nombre_especialidad" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoEspe" ColumnName="codigo_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoEspe" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_especialidad" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Codigo" Modifier="Public" Name="Codigo" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Codigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT MAX(codigo_especialidad) + 1 AS Codigo
+FROM     Especialidad</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="EliminarEspecialidad" Modifier="Public" Name="EliminarEspecialidad" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="EliminarEspecialidad">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM Especialidad
+WHERE  (codigo_especialidad = @CodigoEspecialidad)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="CodigoEspecialidad" ColumnName="codigo_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@CodigoEspecialidad" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_especialidad" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Especialidad" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorCodigo" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorCodigo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorCodigo" UserSourceName="GetDataBuscarPorCodigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_especialidad AS Codigo, nombre_especialidad AS Especialidad
+FROM     Especialidad
+WHERE  (codigo_especialidad = @Codigo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Especialidad" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorNombre" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorNombre" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorNombre" UserSourceName="GetDataBuscarPorNombre">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_especialidad AS Codigo, nombre_especialidad AS Especialidad
+FROM     Especialidad
+WHERE  (nombre_especialidad = @nombreEspecialidad)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="nombreEspecialidad" ColumnName="nombre_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@nombreEspecialidad" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="Especialidad" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GuardarEspecialidad" Modifier="Public" Name="GuardarEspecialidad" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="GuardarEspecialidad">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Especialidad
+                  (codigo_especialidad, nombre_especialidad)
+VALUES (@Codigo,@Especialidad)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_especialidad" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Especialidad" ColumnName="nombre_especialidad" DataSourceName="ExamenHospital.dbo.Especialidad" DataTypeServer="nvarchar(100)" DbType="String" Direction="Input" ParameterName="@Especialidad" Precision="0" ProviderType="NVarChar" Scale="0" Size="100" SourceColumn="nombre_especialidad" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="HabitacionTableAdapter" GeneratorDataComponentClassName="HabitacionTableAdapter" Name="Habitacion" UserDataComponentName="HabitacionTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Habitacion" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetDataListadoHabitaciones" GetMethodModifier="Public" GetMethodName="GetDataListadoHabitaciones" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataListadoHabitaciones" UserSourceName="GetDataListadoHabitaciones">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_habitacion AS Codigo, nombre_habitacion AS Habitacion
+FROM     Habitacion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Habitacion" DataSetColumn="Habitacion" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ActualizarHabitacion" Modifier="Public" Name="ActualizarHabitacion" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ActualizarHabitacion">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE Habitacion
+SET          nombre_habitacion = @Habitacion
+WHERE  (codigo_habitacion = @Codigo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Habitacion" ColumnName="nombre_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@Habitacion" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="nombre_habitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_habitacion" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="Codigo" Modifier="Public" Name="Codigo" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Codigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT MAX(codigo_habitacion) + 1 AS Codigo
+FROM     Habitacion</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="EliminarHabitacion" Modifier="Public" Name="EliminarHabitacion" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="EliminarHabitacion">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM Habitacion
+WHERE  (codigo_habitacion = @Codigo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_habitacion" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Habitacion" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorCodigo" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorCodigo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorCodigo" UserSourceName="GetDataBuscarPorCodigo">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_habitacion AS Codigo, nombre_habitacion AS Habitacion
+FROM     Habitacion
+WHERE  (codigo_habitacion = @Codigo)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="ExamenHospital.dbo.Habitacion" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBuscarPorHabitacion" GetMethodModifier="Public" GetMethodName="GetDataBuscarPorHabitacion" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBuscarPorHabitacion" UserSourceName="GetDataBuscarPorHabitacion">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT codigo_habitacion AS Codigo, nombre_habitacion AS Habitacion
+FROM     Habitacion
+WHERE  (nombre_habitacion = @Habitacion)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Habitacion" ColumnName="nombre_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@Habitacion" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="Habitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ExamenHospitalConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GuardarHabitacion" Modifier="Public" Name="GuardarHabitacion" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="GuardarHabitacion">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Habitacion
+                  (codigo_habitacion, nombre_habitacion)
+VALUES (@Codigo,@Habitacion)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Codigo" ColumnName="codigo_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Codigo" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="codigo_habitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Habitacion" ColumnName="nombre_habitacion" DataSourceName="ExamenHospital.dbo.Habitacion" DataTypeServer="nvarchar(10)" DbType="String" Direction="Input" ParameterName="@Habitacion" Precision="0" ProviderType="NVarChar" Scale="0" Size="10" SourceColumn="nombre_habitacion" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetHospital" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSetHospital" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetHospital">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="IngresoPaciente" msprop:Generator_RowEvHandlerName="IngresoPacienteRowChangeEventHandler" msprop:Generator_RowDeletedName="IngresoPacienteRowDeleted" msprop:Generator_RowDeletingName="IngresoPacienteRowDeleting" msprop:Generator_RowEvArgName="IngresoPacienteRowChangeEvent" msprop:Generator_TablePropName="IngresoPaciente" msprop:Generator_RowChangedName="IngresoPacienteRowChanged" msprop:Generator_UserTableName="IngresoPaciente" msprop:Generator_RowChangingName="IngresoPacienteRowChanging" msprop:Generator_RowClassName="IngresoPacienteRow" msprop:Generator_TableClassName="IngresoPacienteDataTable" msprop:Generator_TableVarName="tableIngresoPaciente">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Ingreso" msprop:Generator_ColumnPropNameInTable="IngresoColumn" msprop:Generator_ColumnPropNameInRow="Ingreso" msprop:Generator_UserColumnName="Ingreso" msprop:Generator_ColumnVarNameInTable="columnIngreso" type="xs:dateTime" />
+              <xs:element name="Egreso" msprop:Generator_ColumnPropNameInTable="EgresoColumn" msprop:Generator_ColumnPropNameInRow="Egreso" msprop:Generator_UserColumnName="Egreso" msprop:Generator_ColumnVarNameInTable="columnEgreso" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CodCama" msprop:Generator_ColumnPropNameInTable="CodCamaColumn" msprop:Generator_ColumnPropNameInRow="CodCama" msprop:Generator_UserColumnName="CodCama" msprop:Generator_ColumnVarNameInTable="columnCodCama" type="xs:int" />
+              <xs:element name="CodPaciente" msprop:Generator_ColumnPropNameInTable="CodPacienteColumn" msprop:Generator_ColumnPropNameInRow="CodPaciente" msprop:Generator_UserColumnName="CodPaciente" msprop:Generator_ColumnVarNameInTable="columnCodPaciente" type="xs:int" />
+              <xs:element name="CodMedico" msprop:Generator_ColumnPropNameInTable="CodMedicoColumn" msprop:Generator_ColumnPropNameInRow="CodMedico" msprop:Generator_UserColumnName="CodMedico" msprop:Generator_ColumnVarNameInTable="columnCodMedico" type="xs:int" />
+              <xs:element name="Medico" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="MedicoColumn" msprop:Generator_ColumnPropNameInRow="Medico" msprop:Generator_UserColumnName="Medico" msprop:Generator_ColumnVarNameInTable="columnMedico" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_UserColumnName="Paciente" msprop:Generator_ColumnVarNameInTable="columnPaciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cama" msprop:Generator_ColumnPropNameInTable="CamaColumn" msprop:Generator_ColumnPropNameInRow="Cama" msprop:Generator_UserColumnName="Cama" msprop:Generator_ColumnVarNameInTable="columnCama">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EstadoCama" msprop:Generator_ColumnPropNameInTable="EstadoCamaColumn" msprop:Generator_ColumnPropNameInRow="EstadoCama" msprop:Generator_UserColumnName="EstadoCama" msprop:Generator_ColumnVarNameInTable="columnEstadoCama" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Camas" msprop:Generator_RowEvHandlerName="CamasRowChangeEventHandler" msprop:Generator_RowDeletedName="CamasRowDeleted" msprop:Generator_RowDeletingName="CamasRowDeleting" msprop:Generator_RowEvArgName="CamasRowChangeEvent" msprop:Generator_TablePropName="Camas" msprop:Generator_RowChangedName="CamasRowChanged" msprop:Generator_UserTableName="Camas" msprop:Generator_RowChangingName="CamasRowChanging" msprop:Generator_RowClassName="CamasRow" msprop:Generator_TableClassName="CamasDataTable" msprop:Generator_TableVarName="tableCamas">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_UserColumnName="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Estado" msprop:Generator_ColumnPropNameInTable="EstadoColumn" msprop:Generator_ColumnPropNameInRow="Estado" msprop:Generator_UserColumnName="Estado" msprop:Generator_ColumnVarNameInTable="columnEstado" type="xs:boolean" />
+              <xs:element name="CodHabitacion" msprop:Generator_ColumnPropNameInTable="CodHabitacionColumn" msprop:Generator_ColumnPropNameInRow="CodHabitacion" msprop:Generator_UserColumnName="CodHabitacion" msprop:Generator_ColumnVarNameInTable="columnCodHabitacion" type="xs:int" />
+              <xs:element name="Habitacion" msprop:Generator_ColumnPropNameInTable="HabitacionColumn" msprop:Generator_ColumnPropNameInRow="Habitacion" msprop:Generator_UserColumnName="Habitacion" msprop:Generator_ColumnVarNameInTable="columnHabitacion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCompleto" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="NombreCompletoColumn" msprop:Generator_ColumnPropNameInRow="NombreCompleto" msprop:Generator_UserColumnName="NombreCompleto" msprop:Generator_ColumnVarNameInTable="columnNombreCompleto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="23" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Medicos" msprop:Generator_RowEvHandlerName="MedicosRowChangeEventHandler" msprop:Generator_RowDeletedName="MedicosRowDeleted" msprop:Generator_RowDeletingName="MedicosRowDeleting" msprop:Generator_RowEvArgName="MedicosRowChangeEvent" msprop:Generator_TablePropName="Medicos" msprop:Generator_RowChangedName="MedicosRowChanged" msprop:Generator_UserTableName="Medicos" msprop:Generator_RowChangingName="MedicosRowChanging" msprop:Generator_RowClassName="MedicosRow" msprop:Generator_TableClassName="MedicosDataTable" msprop:Generator_TableVarName="tableMedicos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Medico" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="MedicoColumn" msprop:Generator_ColumnPropNameInRow="Medico" msprop:Generator_UserColumnName="Medico" msprop:Generator_ColumnVarNameInTable="columnMedico" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_UserColumnName="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Telefono" msprop:Generator_ColumnPropNameInTable="TelefonoColumn" msprop:Generator_ColumnPropNameInRow="Telefono" msprop:Generator_UserColumnName="Telefono" msprop:Generator_ColumnVarNameInTable="columnTelefono">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CodEspecialidad" msprop:Generator_ColumnPropNameInTable="CodEspecialidadColumn" msprop:Generator_ColumnPropNameInRow="CodEspecialidad" msprop:Generator_UserColumnName="CodEspecialidad" msprop:Generator_ColumnVarNameInTable="columnCodEspecialidad" type="xs:int" />
+              <xs:element name="Especialidad" msprop:Generator_ColumnPropNameInTable="EspecialidadColumn" msprop:Generator_ColumnPropNameInRow="Especialidad" msprop:Generator_UserColumnName="Especialidad" msprop:Generator_ColumnVarNameInTable="columnEspecialidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Pacientes" msprop:Generator_RowEvHandlerName="PacientesRowChangeEventHandler" msprop:Generator_RowDeletedName="PacientesRowDeleted" msprop:Generator_RowDeletingName="PacientesRowDeleting" msprop:Generator_RowEvArgName="PacientesRowChangeEvent" msprop:Generator_TablePropName="Pacientes" msprop:Generator_RowChangedName="PacientesRowChanged" msprop:Generator_UserTableName="Pacientes" msprop:Generator_RowChangingName="PacientesRowChanging" msprop:Generator_RowClassName="PacientesRow" msprop:Generator_TableClassName="PacientesDataTable" msprop:Generator_TableVarName="tablePacientes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Paciente" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="PacienteColumn" msprop:Generator_ColumnPropNameInRow="Paciente" msprop:Generator_UserColumnName="Paciente" msprop:Generator_ColumnVarNameInTable="columnPaciente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_UserColumnName="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Telefono" msprop:Generator_ColumnPropNameInTable="TelefonoColumn" msprop:Generator_ColumnPropNameInRow="Telefono" msprop:Generator_UserColumnName="Telefono" msprop:Generator_ColumnVarNameInTable="columnTelefono">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaNac" msprop:Generator_ColumnPropNameInTable="FechaNacColumn" msprop:Generator_ColumnPropNameInRow="FechaNac" msprop:Generator_UserColumnName="FechaNac" msprop:Generator_ColumnVarNameInTable="columnFechaNac" type="xs:dateTime" />
+              <xs:element name="CodMuni" msprop:Generator_ColumnPropNameInTable="CodMuniColumn" msprop:Generator_ColumnPropNameInRow="CodMuni" msprop:Generator_UserColumnName="CodMuni" msprop:Generator_ColumnVarNameInTable="columnCodMuni" type="xs:int" />
+              <xs:element name="Municipio" msprop:Generator_ColumnPropNameInTable="MunicipioColumn" msprop:Generator_ColumnPropNameInRow="Municipio" msprop:Generator_UserColumnName="Municipio" msprop:Generator_ColumnVarNameInTable="columnMunicipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Departamento" msprop:Generator_ColumnPropNameInTable="DepartamentoColumn" msprop:Generator_ColumnPropNameInRow="Departamento" msprop:Generator_UserColumnName="Departamento" msprop:Generator_ColumnVarNameInTable="columnDepartamento">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Departamento" msprop:Generator_RowEvHandlerName="DepartamentoRowChangeEventHandler" msprop:Generator_RowDeletedName="DepartamentoRowDeleted" msprop:Generator_RowDeletingName="DepartamentoRowDeleting" msprop:Generator_RowEvArgName="DepartamentoRowChangeEvent" msprop:Generator_TablePropName="Departamento" msprop:Generator_RowChangedName="DepartamentoRowChanged" msprop:Generator_UserTableName="Departamento" msprop:Generator_RowChangingName="DepartamentoRowChanging" msprop:Generator_RowClassName="DepartamentoRow" msprop:Generator_TableClassName="DepartamentoDataTable" msprop:Generator_TableVarName="tableDepartamento">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Departamento" msprop:Generator_ColumnPropNameInTable="DepartamentoColumn" msprop:Generator_ColumnPropNameInRow="Departamento" msprop:Generator_UserColumnName="Departamento" msprop:Generator_ColumnVarNameInTable="columnDepartamento">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Municipio" msprop:Generator_RowEvHandlerName="MunicipioRowChangeEventHandler" msprop:Generator_RowDeletedName="MunicipioRowDeleted" msprop:Generator_RowDeletingName="MunicipioRowDeleting" msprop:Generator_RowEvArgName="MunicipioRowChangeEvent" msprop:Generator_TablePropName="Municipio" msprop:Generator_RowChangedName="MunicipioRowChanged" msprop:Generator_UserTableName="Municipio" msprop:Generator_RowChangingName="MunicipioRowChanging" msprop:Generator_RowClassName="MunicipioRow" msprop:Generator_TableClassName="MunicipioDataTable" msprop:Generator_TableVarName="tableMunicipio">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Municipio" msprop:Generator_ColumnPropNameInTable="MunicipioColumn" msprop:Generator_ColumnPropNameInRow="Municipio" msprop:Generator_UserColumnName="Municipio" msprop:Generator_ColumnVarNameInTable="columnMunicipio">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Departamento" msprop:Generator_ColumnPropNameInTable="DepartamentoColumn" msprop:Generator_ColumnPropNameInRow="Departamento" msprop:Generator_UserColumnName="Departamento" msprop:Generator_ColumnVarNameInTable="columnDepartamento" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Especialidad" msprop:Generator_RowClassName="EspecialidadRow" msprop:Generator_RowEvHandlerName="EspecialidadRowChangeEventHandler" msprop:Generator_RowDeletedName="EspecialidadRowDeleted" msprop:Generator_RowDeletingName="EspecialidadRowDeleting" msprop:Generator_RowEvArgName="EspecialidadRowChangeEvent" msprop:Generator_TablePropName="Especialidad" msprop:Generator_RowChangedName="EspecialidadRowChanged" msprop:Generator_UserTableName="Especialidad" msprop:Generator_RowChangingName="EspecialidadRowChanging" msprop:Generator_TableClassName="EspecialidadDataTable" msprop:Generator_TableVarName="tableEspecialidad">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Especialidad" msprop:Generator_UserColumnName="Especialidad" msprop:Generator_ColumnPropNameInTable="EspecialidadColumn" msprop:Generator_ColumnPropNameInRow="Especialidad" msprop:Generator_ColumnVarNameInTable="columnEspecialidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Habitacion" msprop:Generator_RowClassName="HabitacionRow" msprop:Generator_RowEvHandlerName="HabitacionRowChangeEventHandler" msprop:Generator_RowDeletedName="HabitacionRowDeleted" msprop:Generator_RowDeletingName="HabitacionRowDeleting" msprop:Generator_RowEvArgName="HabitacionRowChangeEvent" msprop:Generator_TablePropName="Habitacion" msprop:Generator_RowChangedName="HabitacionRowChanged" msprop:Generator_UserTableName="Habitacion" msprop:Generator_RowChangingName="HabitacionRowChanging" msprop:Generator_TableClassName="HabitacionDataTable" msprop:Generator_TableVarName="tableHabitacion">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:int" />
+              <xs:element name="Habitacion" msprop:Generator_UserColumnName="Habitacion" msprop:Generator_ColumnPropNameInTable="HabitacionColumn" msprop:Generator_ColumnPropNameInRow="Habitacion" msprop:Generator_ColumnVarNameInTable="columnHabitacion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:IngresoPaciente" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Camas_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Camas" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Medicos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Medicos" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Pacientes_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Pacientes" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Departamento_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Departamento" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Municipio_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Municipio" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Especialidad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Especialidad" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+    <xs:unique name="Habitacion_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Habitacion" />
+      <xs:field xpath="mstns:Codigo" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

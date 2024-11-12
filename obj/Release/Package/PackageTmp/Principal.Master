@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="ExamenFinalProgra4.Principal" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="bootstrap-533/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script src="bootstrap-533/js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <asp:Label ID="LabelUsuario" runat="server" Text=""></asp:Label></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/PaginasAdmin/Medicos.aspx">Medicos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/PaginasAdmin/Pacientes.aspx">Pacientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/PaginasAdmin/Especialidades.aspx">Especialidades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/PaginasAdmin/Habitacion.aspx">Habitaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/PaginasAdmin/Camas.aspx">Camas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" >Enfermedades</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/PaginasAdmin/IngresarPacientes.aspx">Ingresar Paciente</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
